@@ -1,1 +1,68 @@
 Coloque aqui todas as respostas das práticas indicadas no README.md
+
+Questão 1. route
+
+1 - Rede =  172.18.0.0 / Máscara = 255.255.0.0
+2 - 172.18.0.1
+3 - 2 rotas 172.18.0.0 e 0.0.0.0
+
+Questão 2. ip
+
+1 - 172.18.0.2/16
+2 - Rede = 172.18.0.2 / Máscara = 255.255.0.0
+3 - default via 172.18.0.1 dev eth0
+
+Questão 3. nslookup
+
+www.google.com 142.251.132.228
+www.whitehouse.gov 192.0.66.51
+www.rnp.br 104.18.27.22
+www.ufpb.br 150.165.254.52
+
+Questão 4. ping
+
+1. Teste a conectividade da sua rede local:
+
+Pingue a interface de loopback: ping 127.0.0.1. Qual o tempo de resposta?  0.033ms
+Pingue seu próprio endereço IP dentro do container. Qual o tempo de resposta? 0.045ms
+
+2. Teste a conectividade com a Internet:
+
+ping www.ufpb.br = 25.500ms
+ping www.yahoo.com = 169.450ms
+ping www.brasil.gov.br = 77.192 ms
+ping www.dce.ufpb.br = ping: unknown host
+
+Analise os tempos de resposta:
+
+Compare os tempos de resposta para diferentes sites:
+ping www.google.com = 58.261 ms
+ping www.rnp.br = 59.113 ms
+ping www.whitehouse.gov = 59.186 ms
+
+O que pode influenciar as diferenças nos tempos?
+
+R = considerando que está sendo utilizado uma máquina virtual(Docker) o tráfego pode passar por camadas adicionais de software, que pode contribuir para o aumento de latência. Mas a diferenças entre os sites testados foi mínima.
+
+Questão 5. traceroute
+
+Alguns rotedores não respondem ao traceroute porque podem estar configurados para bloquear ou ignorar pacotes ICMP por questões de segurança, firewall ou desempenho. Mas, isso não significa que há um problema na rede, pois os pacotes podem ainda estar sendo roteados corretamente até o destino.
+
+1. Liste todas as conexões e portas de escuta
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.11:44101        0.0.0.0:*               LISTEN      -           
+
+udp        0      0 127.0.0.11:42970        0.0.0.0:*                           -
+
+2. Mostre a tabela de roteamento
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+default         172.18.0.1      0.0.0.0         UG        0 0          0 eth0
+172.18.0.0      0.0.0.0         255.255.0.0     U         0 0          0 eth0
+
+R = Exibem a tabela de roteamento do sistema, mas com diferenças. o route mostra de forma simples e rápida, exibindo o endereço de IP sem tentar resolver nomes de hosts. O netstat pode incluir informações de interface de rede.
+
+Questão 7. telnet
+1 - Sim, foi feita.
+2 - Deu problema de host, ele não achou o domínio.
